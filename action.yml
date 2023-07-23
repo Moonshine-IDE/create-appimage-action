@@ -25,6 +25,9 @@ inputs:
   appdir-paths:
     description: 'Comma-separated paths to other resources that go into the AppDir'
     required: true
+  output-path:
+    description: 'Path to the output AppImage'
+    required: true
   
 
 runs:
@@ -95,8 +98,12 @@ runs:
 
     - name: Create AppImage
       shell: bash
-      working-directory: build
       run: |
-        wget --quiet "https://github.com/AppImage/AppImageKit/releases/download/continuous/appimagetool-x86_64.AppImage"
-        chmod a+x appimagetool-x86_64.AppImage
-        ARCH=x86_64 ./appimagetool-x86_64.AppImage AppDir
+        wget "https://github.com/AppImage/AppImageKit/releases/download/continuous/appimagetool-x86_64.AppImage" \
+          --directory-prefix build \
+          --quiet
+
+        chmod a+x build/appimagetool-x86_64.AppImage
+        ARCH=x86_64 build/appimagetool-x86_64.AppImage AppDir
+        mkdir --parents ${{ inputs.output-path }}
+        mv ${{ inputs.app-name }}-x86_64.AppImage ${{ inputs.output-path }}
