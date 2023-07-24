@@ -104,7 +104,8 @@ runs:
           --quiet
 
         chmod a+x build/appimagetool-x86_64.AppImage
-        ARCH=x86_64 build/appimagetool-x86_64.AppImage build/AppDir
-        DIR=dirname ${{ inputs.output-path }}
-        mkdir --parents ${DIR}
-        mv ${{ inputs.app-name }}-x86_64.AppImage ${{ inputs.output-path }}
+        ARCH=x86_64 ./build/appimagetool-x86_64.AppImage ./build/AppDir
+        DIR=$(dirname "${{ inputs.output-path }}")
+        mkdir --parents "${DIR}"
+        mv "${{ inputs.app-name }}-x86_64.AppImage" "${{ inputs.output-path }}"
+
