@@ -81,8 +81,8 @@ runs:
         #!/bin/bash
         
         HERE="\$(dirname "\$(readlink -f "\${0}")")"
-        EXEC="\${HERE}/usr/bin/${{ inputs.app-name }}"
-        exec "\${EXEC}"
+        cd "\${HERE}/usr/bin"
+        exec "./${{ inputs.app-name }}"
         EOF
         chmod a+x build/AppDir/AppRun   
 
