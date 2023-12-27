@@ -48,7 +48,7 @@ runs:
         copy_files_to_appdir() {
           IFS=',' read -ra FILES_TO_COPY <<< "$1"
           for file in "${FILES_TO_COPY[@]}"; do 
-            cp -r $file $2; 
+            cp -r "$file" "$2"; 
           done
         }
         
