@@ -46,9 +46,10 @@ runs:
         mkdir -p build/AppDir/usr/share
 
         copy_files_to_appdir() {
-          IFS=',' read -ra FILES_TO_COPY <<< "$1"
+          local IFS=$'\n'
+          local FILES_TO_COPY=($(echo "$1" | tr ',' '\n'))
           for file in "${FILES_TO_COPY[@]}"; do 
-            cp -r "$file" "$2"; 
+            cp -r "$file" "$2"
           done
         }
         
