@@ -82,6 +82,7 @@ runs:
         #!/bin/bash
         
         HERE="\$(dirname "\$(readlink -f "\${0}")")"
+        export HERE
         cd "\${HERE}/usr/bin"
         exec "./${{ inputs.app-name }}"
         EOF
